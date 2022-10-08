@@ -3,7 +3,7 @@ package models
 import play.api.libs.json.{Json, OWrites}
 
 final case class TemplateModel(
-  text: String
+  status: String
 )
 
 object TemplateModel {

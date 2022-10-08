@@ -1,17 +1,20 @@
 package services
 
+import clients.TemplateClient
 import scala.concurrent.{ExecutionContext, Future}
 
 trait TemplateService {
 
-  def getText: Future[String]
+  def getStatus: Future[String]
 
 }
 
-class TemplateServiceImpl()(implicit
+class TemplateServiceImpl(
+  templateClient: TemplateClient
+)(implicit
   ec: ExecutionContext
 ) extends TemplateService {
 
-  override def getText: Future[String] = Future.successful("Hello, Template")
+  override def getStatus: Future[String] = templateClient.getGoogleStatus
 
 }

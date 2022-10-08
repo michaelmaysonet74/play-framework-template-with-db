@@ -16,9 +16,9 @@ class TemplateController(
 
   def get(): Action[AnyContent] =
     Action.async {
-      templateService.getText.map { text =>
+      templateService.getStatus.map { status =>
         Ok(
-          Json.toJson(TemplateModel(text))
+          Json.toJson(TemplateModel(status))
         )
       }
     }
