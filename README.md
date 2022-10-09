@@ -1,5 +1,5 @@
-# play-framework-template
-Scala Play! Framework Template
+# play-framework-template-with-db
+Scala Play! Framework Template with DB support (Slick)
 
 ## Getting Started
 
