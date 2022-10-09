@@ -1,7 +1,6 @@
 package loader
 
 import modules.TemplateModule
-import akka.actor.ActorSystem
 import akka.stream._
 import com.softwaremill.macwire.wire
 import play.api.ApplicationLoader.Context
@@ -11,6 +10,7 @@ import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import play.filters.HttpFiltersComponents
 import play.shaded.ahc.org.asynchttpclient.{DefaultAsyncHttpClient, DefaultAsyncHttpClientConfig}
 import router.Routes
+import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.ExecutionContext
 
@@ -28,8 +28,10 @@ class AppComponents(
 
   implicit lazy val ec: ExecutionContext = actorSystem.dispatcher
 
-  implicit lazy val wsClient = {
-    implicit val materializer = SystemMaterializer(actorSystem).materializer
+  val db = Database.forConfig("postgres")
+
+  implicit lazy val wsClient: StandaloneAhcWSClient = {
+    implicit val materializer: Materializer = SystemMaterializer(actorSystem).materializer
 
     val asyncHttpClientConfig = new DefaultAsyncHttpClientConfig.Builder()
       .setMaxRequestRetry(0)

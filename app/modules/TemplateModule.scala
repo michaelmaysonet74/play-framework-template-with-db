@@ -10,7 +10,7 @@ import play.api.libs.ws.ahc.StandaloneAhcWSClient
 
 import scala.concurrent.ExecutionContext
 
-trait TemplateModule {
+trait TemplateModule extends TemplateDAOModule {
 
   implicit def ec: ExecutionContext
   implicit def wsClient: StandaloneAhcWSClient
