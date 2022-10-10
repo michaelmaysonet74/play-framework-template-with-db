@@ -14,7 +14,7 @@ class TemplateController(
   ec: ExecutionContext
 ) extends AbstractController(cc) {
 
-  def get(): Action[AnyContent] =
+  def getStatus(): Action[AnyContent] =
     Action.async {
       templateService.getStatus.map { status =>
         Ok(

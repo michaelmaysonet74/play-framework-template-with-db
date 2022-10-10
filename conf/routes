@@ -3,5 +3,5 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-GET     /               controllers.TemplateController.get()
+GET     /status         controllers.TemplateController.getStatus()
 GET     /templates      controllers.TemplateController.getTemplates()

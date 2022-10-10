@@ -1,8 +1,8 @@
 package services
 
 import clients.TemplateClient
-import dao.TemplateDAO
-import dao.{models => daoModels}
+import database.dao.TemplateDao
+import database.models.TemplateRecord
 import models.Template
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -17,7 +17,7 @@ trait TemplateService {
 
 class TemplateServiceImpl(
   templateClient: TemplateClient,
-  templateDAO: TemplateDAO
+  templateDao: TemplateDao
 )(implicit
   ec: ExecutionContext
 ) extends TemplateService {
@@ -25,10 +25,13 @@ class TemplateServiceImpl(
   override def getStatus: Future[String] = templateClient.getGoogleStatus
 
   override def getTemplates: Future[Seq[Template]] =
-    templateDAO.all.map(_.map(mapToTemplate))
+    templateDao.all.map(_.map(mapToTemplate))
 
-  private def mapToTemplate(template: daoModels.Template): Template = Template(
+  private def mapToTemplate(
+    template: TemplateRecord
+  ): Template = Template(
     url = template.url,
     status = template.status
   )
+
 }

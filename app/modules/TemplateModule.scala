@@ -4,18 +4,18 @@ import clients.TemplateClient
 import controllers.TemplateController
 import services.{TemplateService, TemplateServiceImpl}
 import com.softwaremill.macwire.wire
+import database.modules.DatabaseModule
+import play.api.libs.ws.WSClient
 import play.api.mvc.ControllerComponents
-
-import play.api.libs.ws.ahc.StandaloneAhcWSClient
 
 import scala.concurrent.ExecutionContext
 
-trait TemplateModule extends TemplateDAOModule {
+trait TemplateModule extends DatabaseModule {
 
   implicit def ec: ExecutionContext
-  implicit def wsClient: StandaloneAhcWSClient
 
   def controllerComponents: ControllerComponents
+  def wsClient: WSClient
 
   lazy val templateClient: TemplateClient = wire[TemplateClient]
   lazy val templateService: TemplateService = wire[TemplateServiceImpl]
