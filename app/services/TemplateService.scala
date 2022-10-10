@@ -9,7 +9,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 trait TemplateService {
 
-  def getStatus: Future[String]
+  def getStatus(url: String): Future[String]
 
   def getTemplates: Future[Seq[Template]]
 
@@ -22,7 +22,8 @@ class TemplateServiceImpl(
   ec: ExecutionContext
 ) extends TemplateService {
 
-  override def getStatus: Future[String] = templateClient.getGoogleStatus
+  override def getStatus(url: String): Future[String] =
+    templateClient.getStatus(url)
 
   override def getTemplates: Future[Seq[Template]] =
     templateDao.all.map(_.map(mapToTemplate))

@@ -6,7 +6,7 @@ lazy val server = (project in file("."))
   .settings(
     name := """play-framework-template-with-db""",
     organization := "com.michaelmaysonet74",
-    version := "2.0.0",
+    version := "2.1.0",
     scalaVersion := "2.13.8",
     libraryDependencies ++= {
       val macwireVersion = "2.5.8"
