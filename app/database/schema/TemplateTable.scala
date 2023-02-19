@@ -5,7 +5,7 @@ import slick.jdbc.PostgresProfile.api._
 
 class TemplateTable(
   tag: Tag
-) extends Table[TemplateRecord](tag, "play_framwork_template") {
+) extends Table[TemplateRecord](tag, "play_framework_template") {
 
   def id = column[Long]("id", O.PrimaryKey)
 
