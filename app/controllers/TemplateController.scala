@@ -18,12 +18,12 @@ class TemplateController(
 
   def getStatus(url: String): Action[AnyContent] =
     Action.async {
-      logger.info("GET /status")
+      logger.info(s"GET /rest/status?url=$url")
       templateService.getStatus(url).map { status =>
         Ok(
           Json.toJson(
             TemplateResponse(
-              url = "www.google.com",
+              url = url,
               status = status
             )
           )
@@ -31,9 +31,9 @@ class TemplateController(
       }
     }
 
-  def getTemplates(): Action[AnyContent] =
+  def getTemplates: Action[AnyContent] =
     Action.async {
-      logger.info("GET /templates")
+      logger.info("GET /rest/templates")
       templateService.getTemplates.map { templates =>
         Ok(
           Json.toJson(

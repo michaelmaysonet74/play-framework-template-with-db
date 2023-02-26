@@ -8,6 +8,7 @@ import play.api.routing.Router
 import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.db.slick.{DbName, SlickComponents}
 import play.filters.HttpFiltersComponents
+import router.Routes
 import slick.basic.DatabaseConfig
 import slick.jdbc.PostgresProfile
 

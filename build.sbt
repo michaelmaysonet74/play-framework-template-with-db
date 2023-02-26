@@ -1,26 +1,25 @@
+import Dependencies._
 import play.sbt.PlayImport.PlayKeys._
 import com.typesafe.sbt.packager.docker._
 
-lazy val server = (project in file("."))
+ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / version := "2.2.0"
+ThisBuild / organization := "com.michaelmaysonet74"
+ThisBuild / organizationName := "michaelmaysonet74"
+
+lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
     name := """play-framework-template-with-db""",
-    organization := "com.michaelmaysonet74",
-    version := "2.1.0",
-    scalaVersion := "2.13.8",
-    libraryDependencies ++= {
-      val macwireVersion = "2.5.8"
-      val playSlickVersion = "5.1.0"
-      Seq(
-        "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
-        "com.softwaremill.macwire" %% "macros" % macwireVersion % Provided,
-        "com.softwaremill.macwire" %% "util" % macwireVersion,
-        "com.typesafe.play" %% "play-slick" % playSlickVersion,
-        "com.typesafe.play" %% "play-slick-evolutions" % playSlickVersion,
-        "org.postgresql" % "postgresql" % "42.5.0",
-        ws
-      )
-    },
+    libraryDependencies ++= Seq(
+      scalaTest % Test,
+      macwireMacros % Provided,
+      macwireUtil,
+      playSlick,
+      playSlickEvolutions,
+      postgres,
+      ws
+    ),
     playDefaultPort := 9000
   )
   .settings(
